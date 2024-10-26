@@ -39,7 +39,7 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.status(404).json("All fields are required");
 
   if (!validator.isEmail(email))
-    return res.status(404).json("email is not validated");
+    return res.status(404).json("Invalid email or password");
 
   const userAvailable = await User.findOne({ email });
 
@@ -55,7 +55,8 @@ const loginUser = asyncHandler(async (req, res) => {
           name: userAvailable.name,
         },
       },
-      process.env.API_ACCESS_TOKEN
+      process.env.API_ACCESS_TOKEN,
+      { expiresIn: "1h" }
     );
     res.status(200).json({ accessToken });
   } else {
