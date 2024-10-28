@@ -1,5 +1,5 @@
 function App() {
-  return <>chat-app</>;
+  return <>and React logos to learn more</>;
 }
 
 export default App;
